@@ -1,0 +1,15 @@
+**/.git
+**/.github
+**/.gitignore
+**/.dockerignore
+**/.npmignore
+**/.eslintignore
+**/.editorconfig
+**/.travis.yml
+**/.vscode
+**/test
+**/node_modules
+**/LICENSE
+**/README.md
+**/npm-debug.log
+Dockerfile.*
