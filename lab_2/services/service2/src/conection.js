@@ -13,4 +13,4 @@ class Connection {
     }
   }
 
-export {Connection}; 
+export {Connection};
