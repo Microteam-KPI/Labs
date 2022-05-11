@@ -17,4 +17,4 @@ spec:
           imagePullPolicy: Never
           name: service2
           ports:
-            - containerPort: 3000
+            - containerPort: 8080
