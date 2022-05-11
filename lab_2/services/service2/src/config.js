@@ -1,10 +1,9 @@
 const config = {
-    user: 'nastiabondarenko',
-    host: 'localhost',
-    database: 'postgres2',
-    password: '1',
-    port: 5432,
-  };
+  user: process.env["POSTGRES_USER"],
+  host: process.env["POSTGRES_SERVICE_HOST"],
+  database: process.env["POSTGRES_DB"],
+  password: process.env["POSTGRES_PASSWORD"],
+  port: process.env["POSTGRES_SERVICE_PORT"],
+};
 
-
-export {config}; 
+export { config };
