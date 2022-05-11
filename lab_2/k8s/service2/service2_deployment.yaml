@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service2-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service2
+  template:
+    metadata:
+     labels:
+       app: service2
+    spec:
+      initContainers:
+        - name: run-migrations
+          image: service2-migrations:0.1.0
+          command: ["migrate", "-path", "/migrations", "-database",  "$(POSTGRESQL_URL)", "goto", "$(VERSION)"] # CLI команда запуску міграцій, де $(POSTGRESQL_URL) і $(VERSION) змінні середовища
+          envFrom:
+            - configMapRef:
+                name: service2-config
+            - secretRef:
+                name: service2-secret
+          env:
+            - name: POSTGRESQL_URL
+              value: "postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres:5432/$(POSTGRES_DB)?sslmode=disable"
+            - name: VERSION
+              value: "20220508115500"
+      containers:
+        - image: service2:0.2.0
+          imagePullPolicy: Never
+          name: service2
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: service2-config
+            - secretRef:
+                name: service2-secret
